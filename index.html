@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyzil – Pricing</title>
+
+  <!-- Google Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-639FFX8WGX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-639FFX8WGX");
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-black: #000000;
+      --purple-primary: #b76e79;
+      --purple-secondary: #c97f8a;
+      --purple-light: #d4919b;
+      --purple-accent: #b08968;
+      --text-color: #d1d5db;
+      --text-muted: #9ca3af;
+      --card-bg: #111111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--primary-black);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      font-weight: 300;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Background canvas */
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: var(--primary-black);
+    }
+
+    /* Page header (logo + title) */
+    .pricing-hero {
+      padding-top: 80px;
+      padding-bottom: 40px;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo-img {
+      height: 70px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px rgba(183, 110, 121, 0.3));
+    }
+
+    .logo-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .pricing-heading {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--purple-accent) 50%, var(--purple-light) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .pricing-sub {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Pricing section */
+    .pricing-section {
+      padding: 20px 0 100px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .price-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(183, 110, 121, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(183, 110, 121, 0.05), transparent);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+
+    .price-card:hover::before {
+      left: 100%;
+    }
+
+    .price-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(183, 110, 121, 0.3);
+      border-color: rgba(183, 110, 121, 0.6);
+    }
+
+    .price-top {
+      padding: 35px 20px 45px;
+      color: #ffffff;
+      position: relative;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .price-card.trial .price-top {
+      background: linear-gradient(135deg, #b08968 0%, #c97f8a 100%);
+    }
+
+    .price-card.standard .price-top {
+      background: linear-gradient(135deg, #b76e79 0%, #d4919b 100%);
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .plan-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .plan-price {
+      font-family: 'Manrope', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .plan-price span {
+      font-size: 1.8rem;
+      margin-right: 5px;
+      font-weight: 600;
+    }
+
+    .plan-duration {
+      font-size: 1rem;
+      margin-top: 8px;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+
+    .price-body {
+      padding: 45px 35px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 35px;
+      font-size: 1rem;
+      color: var(--text-color);
+      text-align: left;
+    }
+
+    .feature-list li {
+      padding: 12px 0;
+      position: relative;
+      padding-left: 30px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--purple-accent);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* Buy Now button */
+    .buy-now-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #b08968 0%, #d4919b 100%);
+      color: #ffffff;
+      padding: 18px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(176, 137, 104, 0.4);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      align-self: center;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .buy-now-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .buy-now-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(176, 137, 104, 0.6);
+    }
+
+    .buy-now-btn:hover::before {
+      left: 100%;
+    }
+
+    .buy-now-btn:focus {
+      outline: 2px solid var(--purple-accent);
+      outline-offset: 3px;
+    }
+
+    .note-text {
+      margin-top: 50px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .note-text strong {
+      color: var(--purple-light);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0a0a0a;
+      padding: 50px 0 30px;
+      border-top: 1px solid rgba(183, 110, 121, 0.2);
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      text-align: center;
+    }
+
+    .footer-logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px rgba(183, 110, 121, 0.3));
+    }
+
+    .footer-logo-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--purple-light);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .footer-bottom {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin-top: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 767px) {
+      .pricing-hero {
+        padding-top: 60px;
+        padding-bottom: 30px;
+      }
+
+      .logo-img {
+        height: 55px;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        gap: 30px;
+      }
+
+      .price-card:hover {
+        transform: none;
+      }
+
+      .price-card:active {
+        background: rgba(183, 110, 121, 0.05);
+      }
+
+      .buy-now-btn:hover {
+        transform: none;
+      }
+
+      .buy-now-btn:active {
+        transform: scale(0.98);
+      }
+
+      .footer-logo-img {
+        height: 50px;
+      }
+
+      .footer-logo-text {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .pricing-grid {
+        max-width: 750px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Canvas -->
+  <canvas id="background-canvas"></canvas>
+
+  <!-- Header (no navbar) -->
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="logo-container">
+        <img src="logo.png" alt="Tyzil Logo" class="logo-img">
+        <span class="logo-text">TYZIL</span>
+      </div>
+      <h1 class="pricing-heading">Choose Your Plan</h1>
+      <p class="pricing-sub">Stop watching tutorials. Start building real projects. Pick the plan that matches your commitment level.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Trial -->
+        <div class="price-card trial">
+          <div class="price-top">
+            <div class="plan-name">Trial</div>
+            <div class="plan-price"><span>₹</span>99</div>
+            <div class="plan-duration">4 days</div>
+          </div>
+          <div class="price-body">
+            <ul class="feature-list">
+              <li>Test the waters before committing</li>
+              <li>Access to skill tracks</li>
+              <li>Weekly challenges (limited)</li>
+              <li>Community access</li>
+              <li>Basic mentor support</li>
+            </ul>
+            <a href="https://rzp.io/rzp/LL0JFKC" class="buy-now-btn">Start Trial</a>
+          </div>
+        </div>
+
+        <!-- Monthly -->
+        <div class="price-card standard">
+          <div class="price-top">
+            <span class="badge">Popular</span>
+            <div class="plan-name">Monthly</div>
+            <div class="plan-price"><span>₹</span>499</div>
+            <div class="plan-duration">per month</div>
+          </div>
+          <div class="price-body">
+            <ul class="feature-list">
+              <li>Full access to all skill tracks</li>
+              <li> weekly challenges</li>
+              <li>Public accountability system</li>
+              <li>Priority mentor feedback</li>
+              <li>Community + peer reviews</li>
+              <li>Portfolio-ready projects</li>
+            </ul>
+            <a href="https://rzp.io/rzp/Cf6U9jD7" class="buy-now-btn">Join Now</a>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo-container">
+          <img src="logo.png" alt="Tyzil Logo" class="footer-logo-img">
+          <span class="footer-logo-text">TYZIL</span>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Tyzil. For builders who execute, not just learn.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Background dots animation -->
+  <script>
+    const canvas = document.getElementById("background-canvas");
+    if (canvas && window.innerWidth >= 768) {
+      const ctx = canvas.getContext("2d");
+      let dots = [];
+      const dotCount = 50;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function createDots() {
+        dots = [];
+        for (let i = 0; i < dotCount; i++) {
+          dots.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            size: Math.random() * 2 + 1
+          });
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < dots.length; i++) {
+          const dot = dots[i];
+          dot.x += dot.vx;
+          dot.y += dot.vy;
+
+          if (dot.x < 0 || dot.x > canvas.width) dot.vx *= -1;
+          if (dot.y < 0 || dot.y > canvas.height) dot.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(212, 145, 155, 0.4)";
+          ctx.fill();
+
+          for (let j = i + 1; j < dots.length; j++) {
+            const dot2 = dots[j];
+            const dx = dot.x - dot2.x;
+            const dy = dot.y - dot2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 150) {
+              ctx.beginPath();
+              ctx.moveTo(dot.x, dot.y);
+              ctx.lineTo(dot2.x, dot2.y);
+              ctx.strokeStyle = `rgba(176, 137, 104, ${0.2 * (1 - distance / 150)})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+
+      resizeCanvas();
+      createDots();
+      animate();
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        createDots();
+      });
+    }
+  </script>
+</body>
+</html>
